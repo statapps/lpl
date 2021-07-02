@@ -36,7 +36,7 @@ lple.formula <- function(formula, data=list(...), control = list(...), ...){
   
   y <- model.response(mf)
   
-  control = do.call("lplb.control", control)
+  control = do.call("lpl.control", control)
   
   fit <- lple.default(x, y, control)
   fit$call <- match.call()
@@ -147,3 +147,4 @@ asymSCB = function(h, kernel, conf.int = 0.95){
   dn = .dvn(h, kernel)
   pn = (dn + (log(2)-log(-log(conf.int)))*(-2*log(h))^-0.5)
 }
+
