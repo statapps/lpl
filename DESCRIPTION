@@ -1,0 +1,11 @@
+Package: lpl
+Type: Package
+Title: Local partial likelihood estimator and simultanenous confidence bands
+Version: 0.01
+Date: 2021-07-02
+Author: Bingshu Chen [aut, cre], Yicong Liu [aut], Siwei Zhang [aut], Teng Wen [aut]
+Maintainer: Bingshu E. Chen <bingshu.chen@queensu.ca>
+Depends: parallel, survival
+Description: Local Partial Likelihood (LPL) is a set of tools to test multivariate covariates-biomatker interactions for survival data
+License: GPL-2
+LazyData: TRUE
