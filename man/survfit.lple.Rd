@@ -9,13 +9,14 @@ Computes the predicted survival function for a model fitted by (lple).
 }
 \usage{
 ## S3 method for class 'lple'
-\method{survfit}{lple}(object, se.fit=TRUE, conf.int=.95)
+\method{survfit}{lple}(formula, se.fit=TRUE, conf.int=.95, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{object}{The results of a (lple) fit.}
-  \item{se.fit}{A logical value indicating whether standard errors shall be computed. Default is TRUE.}
-  \item{conf.int}{The level for a two-sided confidence interval on the survival curve. Default is 0.95.}
+  \item{formula}{a fitted model from (lple) fit}
+  \item{se.fit}{a logical value indicating whether standard errors shall be computed. Default is TRUE}
+  \item{conf.int}{The level for a two-sided confidence interval on the survival curve. Default is 0.95}
+  \item{...}{other arguments to the specific method}
 }
 \details{
   survfit.lple is called to compuate baseline survival function from the lple model \code{\link{lple}}.

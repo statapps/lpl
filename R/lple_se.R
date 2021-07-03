@@ -1,10 +1,10 @@
 
-Sk2g = function(X, y, control, bw0, w0, haz0, exb){
+.Sk2g = function(X, y, control, bw0, w0, haz0, exb){
   kernel = control$kernel
   status = y[, 2]
   h  = control$h
   p1 = control$p1
-  XR = interaction_X_w0(X, p1, w0)
+  XR = .interaction_X_w0(X, p1, w0)
   p  = ncol(X) - 1
   p2 = p + p1 + 1 #p2 total vector length for fai
   n  = nrow(X)
@@ -26,9 +26,9 @@ Sk2g = function(X, y, control, bw0, w0, haz0, exb){
   #Sf1 = Sm %*% (U * ezb_fai)
 
   # this code is faster
-  Sf0 = rcumsum(ezb_fai)  #reverse cumsum
+  Sf0 = .rcumsum(ezb_fai)  #reverse cumsum
   ubz = U*ezb_fai
-  Sf1 = apply(ubz, 2, rcumsum)
+  Sf1 = apply(ubz, 2, .rcumsum)
 
   TSf1 = U - Sf1/c(Sf0)
   
@@ -55,7 +55,7 @@ Sk2g = function(X, y, control, bw0, w0, haz0, exb){
   #code with reverse cumsum (rcumsum) runs faster
   #Sf2 = apply(Z2ezb_fai, c(1, 2), function(x, y) {return(y %*% x)}, Sm)
   #print(Sf2[1, , ])
-  Sf2 = apply(Z2ezb_fai, c(1, 2), rcumsum)
+  Sf2 = apply(Z2ezb_fai, c(1, 2), .rcumsum)
   #print(Sf2[1, , ])
   Sf1_2 = aperm(array(apply(Sf1, 1, function(x) { return(x %*% t(x))}), 
                     c(p2, p2, n)), c(3, 1, 2))
@@ -82,7 +82,7 @@ lple_se = function(X, y, control, betaw, gw){
   gnw = .appxf(gw, x=w, xout = nw)
 
   exb = exp(rowSums(Z*bnw) + gnw)
-  rxb = rcumsum(exb)     #sum over risk set 
+  rxb = .rcumsum(exb)     #sum over risk set 
   haz0= nevent/rxb       #hazard function
   haz = exb*haz0
 
@@ -94,7 +94,7 @@ lple_se = function(X, y, control, betaw, gw){
   for (i in 1:m) {
     w0  = w[i]
     bw0 = betaw[i, ]
-    skf = Sk2g(X, y, control, bw0, w0, haz0, exb)
+    skf = .Sk2g(X, y, control, bw0, w0, haz0, exb)
     A_n = skf$A_n
     A1  = solve(A_n)
     Pi_n= skf$Pi_n

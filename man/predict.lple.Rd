@@ -1,5 +1,6 @@
 \name{predict.lple}
 \alias{predict.lple}
+\alias{residuals.lple}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 predict a lple object
@@ -9,12 +10,16 @@ Compute fitted values and prediction error for a model fitted by lple
 }
 \usage{
 ## S3 method for class 'lple'
-\method{predict}{lple}(object, newdata, newy=NULL)
+\method{predict}{lple}(object, newdata, newy=NULL, ...)
+\method{residuals}{lple}(object, type=c("martingale", "deviance"), ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{object}{the results of a lple fit.}
-  \item{newdata}{Optional new data at which to do predictions. If absent, predictions are for the dataframe used in the original fit.}
+  \item{object}{a model object from the lple fit}
+  \item{newdata}{optional new data at which to do predictions. If absent, predictions are for the dataframe used in the original fit}
+  \item{newy}{optional new response data. Default is NULL}
+  \item{type}{type of residuals, the default is a martingale residual}
+  \item{...}{additional arguments affecting the predictions produced}
 }
 \details{
   predict.lple is called to predict object from the lple model \code{\link{lple}}.
@@ -36,10 +41,12 @@ predict.lple returns a list of predicted values, prediction error and residuals.
 \author{Bingshu E. Chen}
 \seealso{
  The default method for predict \code{\link{predict}},
+  
+ For the Cox model prediction: \code{\link{predict.coxph}}.
 #\code{\link{survfit.lple}}
 }
 \examples{
-#
+#  fit = lple(y~x+z, data = dat)
 #  predict(fit)
 #
 }

@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ Auxiliary function for lpl fitting}
 \description{
-Auxiliary function for \code{\link{lpl}} fitting. 
+Auxiliary function for \code{\link{lple}} fitting. 
 Typically only used internally by 'lpl', but may be used to construct a control argument to either function. 
 }
 \usage{
@@ -29,7 +29,8 @@ This function checks the internal consisitency and returns a list of value as in
 \author{Siwei Zhang and Bingshu E. Chen}
 
 \seealso{
-\code{\link{lpl}}
+\code{\link{lplb}}, 
+\code{\link{lple}}
 }
 \examples{
 ## The default control values are: h = 0.2, kernel = 'gaussian', B = 200, w0 = seq(0.05, 0.95, 0.025), p1 = 1, pctl = seq(0.2, 0.8, 0.1) 

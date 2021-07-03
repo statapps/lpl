@@ -35,18 +35,17 @@ and bootstrap method to test the significance of the interactions.
 Maintainer: Bingshu E. Chen <bingshu.chen@queensu.ca>
 }
 \references{
-1. Zhang, S., Jiang, W. and Chen, B. E. (2016). Estimate and test of multivariate covariates 
-and biomarker interactions for survival data based on local partial likelihood. Manuscript in
- preparation.
+1. Fan, J., Lin, H,, Zhou, Y. (2006). Local partial-likelihood estimation for lifetime data. The Annals of Statistics. 34, 290-325.
 
 2. Liu, Y., Jiang, W. and Chen, B. E. (2015). Testing for treatment-biomarker interaction based on local partial-likelihood. Statistics in Medicine. 34, 3516-3530.
+
+3. Zhang, S., Jiang, W. and Chen, B. E. (2016). Estimate and test of multivariate covariates and biomarker interactions for survival data based on local partial likelihood. Manuscript in preparation.
 }
 \keyword{lpl}
 \keyword{biomarker}
 \keyword{local linear model}
 \seealso{
 \code{coxph, }
-\code{bhm, }
 \code{survival}
 }
 \examples{

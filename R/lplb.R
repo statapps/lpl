@@ -22,7 +22,9 @@ lplb.default <- function(x, y, control, ...){
   ## transform w into interval (0,1)
   p=ncol(X)-1
   w = X[, p+1]
-  X[ ,p+1]=x.cdf(X[ ,p+1])
+  gfn = ecdf(w)
+  X[ ,p+1]=gfn(w)
+  #X[ ,p+1]=x.cdf(X[ ,p+1])
   X = as.matrix(X)
   
   fit = lple_fit(X, y, control, maxT=TRUE)
@@ -47,7 +49,7 @@ lplb.default <- function(x, y, control, ...){
   return(fit)
 }
 
-lplb.control = function(h = 0.2, kernel = 'gaussian', B = 200, w0 = seq(0.05, 0.95, 0.025), p1 = 1, pctl = seq(0.2, 0.8, 0.1)) {
+lpl.control = function(h = 0.2, kernel = 'gaussian', B = 200, w0 = seq(0.05, 0.95, 0.025), p1 = 1, pctl = seq(0.2, 0.8, 0.1)) {
   if (!is.numeric(B) || B <= 0) 
     stop("value of 'B' must be > 0")
   if (!is.numeric(h) || h <= 0 || h >= 1) 

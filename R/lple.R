@@ -14,7 +14,9 @@ lple.default <- function(x, y, control, ...){
   ## transform w into interval (0,1)
   p=ncol(X)-1
   w = X[, p+1]
-  X[ ,p+1]=x.cdf(X[ ,p+1])
+  gfn = ecdf(w)
+  #X[ ,p+1]=x.cdf(X[ ,p+1])
+  X[ ,p+1]=gfn(w)
   X = as.matrix(X)
   
   fit = lple_fit(X, y, control)

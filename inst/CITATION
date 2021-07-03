@@ -1,0 +1,42 @@
+#citHeader("To cite package 'bhm' in publications use:")
+
+# Grab the version and date from the DESCRIPTION file
+if(!exists("meta") || is.null(meta)) meta <- packageDescription("lpl")
+#year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date)
+vers <- paste("R package version", meta$Version)
+
+bibentry(bibtype="Manual",
+         title = "An R Package for local partial likelihood",
+	 author= c(person(c("Bingshu E"), "Chen")),
+	 year = "2021",
+	 note =vers,
+ 	 url="https://CRAN.R-project.org/package=lpl",
+	 key= "Local partial likelihood -package"
+	 )
+
+bibentry(bibtype= "article",
+         title="Local partial-likelihood estimation for lifetime data",
+	 author=c(person(c("J"), "Fan"),
+	          person(c("H", "Lin")),
+		  person(c("Y", "Zhou"))),
+         year = "2006",
+         journal= "The Annals of Statistics",
+         address = "New York",
+         isbn = "",
+	 key = "Local partial likelihood"
+	 )
+
+bibentry(bibtype= "article",
+         title="Testing for treatment-biomarker interaction based on local partial-likelihood",
+         author=c(person("Yicong", "Liu"),
+                  person("Wenyu", "Jiang"),
+                  person(c("Bingshu E"), "Chen")
+
+         ),
+         year = "2016",
+         journal= "Statistics in Medicine",
+         address = "Weley",
+         isbn = "",
+         key = "Biomarker treatment interaction"
+         )
+

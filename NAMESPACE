@@ -1,3 +1,25 @@
 exportPattern("^[[:alpha:]]+")
 import(parallel)
 import(survival)
+
+importFrom("graphics", "par")
+importFrom("stats", "approx", "dnorm", "ecdf", "integrate", "model.frame",
+           "model.matrix", "model.response", "predict", "qnorm",
+           "quantile", "residuals", "vcov")
+
+S3method(ibs, lple)
+
+S3method(lplb, default)
+S3method(lplb, formula)
+
+S3method(lple, default)
+S3method(lple, formula)
+
+S3method(print, lplb)
+S3method(print, lple)
+
+S3method(plot, lple)
+
+S3method(predict, lple)
+S3method(residuals, lple)
+S3method(survfit, lple)

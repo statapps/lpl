@@ -1,10 +1,10 @@
-ibs = function(x, ...) UseMethod("ibs")
+ibs = function(object, ...) UseMethod("ibs")
 
 lple.default <- function(x, ...){
   print("Input must be either coxph or lple object.")
 }
 
-ibs.lple= function(object, newdata=NULL, newy = NULL) {
+ibs.lple= function(object, newdata=NULL, newy = NULL, ...) {
   # When one does not use new data to calculate integrated Brier score, 
   # original data and y will be used 
   y = object$y

@@ -1,16 +1,16 @@
 ### 01. basic functions
 ## 01_1) transform w into interval (0,1)
-x.cdf = function(x) {
-  n = length(x)
-  p = rep(0, n)
-  for (i in 1:n)
-    p[i] = sum(x<=x[i])
-  p = p/(n+1)
-  return(p)
-}
+#x.cdf = function(x) {
+#  n = length(x)
+#  p = rep(0, n)
+#  for (i in 1:n)
+#    p[i] = sum(x<=x[i])
+#  p = p/(n+1)
+#  return(p)
+#}
 
 #reverse cumsum
-rcumsum=function(x) rev(cumsum(rev(x))) # sum from last to first
+.rcumsum=function(x) rev(cumsum(rev(x))) # sum from last to first
 
 ### Approximate function
 .appxf = function(y, x, xout){ approx(x,y,xout=xout,rule=2)$y }
@@ -36,7 +36,7 @@ K_func<-function(w, u, h, kernel = c("gaussian", "epanechnikov", "rectangular", 
 }
 
 ## 01_3) transform matrix X into new matrix with p1 interaction (with w) terms
-interaction_X=function(X, p1){
+.interaction_X=function(X, p1){
   p=ncol(X)-1
   n=nrow(X)
   X2 = matrix(0, n, p+p1+1)
@@ -48,8 +48,9 @@ interaction_X=function(X, p1){
   X2[, p+p1+1] = w
   return(X2)
 }
+
 ## 01_4) transform matrix X into new matrix with p1 interaction with (w-w0) terms
-interaction_X_w0=function(X, p1, w0){
+.interaction_X_w0=function(X, p1, w0){
   p=ncol(X)-1
   n=nrow(X)
   ## build interaction terms with (w-w0) in X
@@ -63,7 +64,7 @@ interaction_X_w0=function(X, p1, w0){
 }
 
 ### Calculate bias for lple
-bias = function(object) {
+.bias = function(object) {
   control = object$control
   h  = control$h
   kn = control$kernel
@@ -88,7 +89,7 @@ bias = function(object) {
 # including the calculation of I and pi
 
 ## 02_1 S(k)_theta and I_theta, pi_theta
-Sk2t = function(X, y, theta) {
+.Sk2t = function(X, y, theta) {
   ## NOTE!!!!: input X should be ordered by time already!!!!!!!!!!!!!
   ## setup parameters
   status = y[, 2] #y[ ,1] is time; y[ ,2]is status
@@ -125,7 +126,7 @@ Sk2t = function(X, y, theta) {
 }
 
 ## 02_2 S(k)_fai and I_fai, pi_fai, pi_cov
-Sk2f = function(X, y, control, bw0, w0, GSt1) {
+.Sk2f = function(X, y, control, bw0, w0, GSt1) {
   kernel = control$kernel
   ## NOTE!!!!: input X should be ordered by time already!!!!!!!!!!!!!
   ## setup parameters
@@ -134,7 +135,7 @@ Sk2f = function(X, y, control, bw0, w0, GSt1) {
   w_est = control$w_est
   p1 = control$p1
 
-  X_R = interaction_X_w0(X,p1,w0)
+  X_R = .interaction_X_w0(X,p1,w0)
   p = ncol(X)-1
   p_th = ncol(X)
   p_fai = p+p1+1
@@ -197,7 +198,7 @@ maxTest = function(X,y,control,theta, betaw){
 
   ## build var(beta(w)-beta)
   ## I_theta, pi_theta, sigma do not change with w0, so do St0, St1, St2, which should be outside the loop m
-  skt=Sk2t(X, y, theta)
+  skt=.Sk2t(X, y, theta)
   I_theta = skt$I_theta
   pi_theta = skt$pi_theta
   GSt1 = skt$GSt1 # for calculating pi_cov in Sk2f()
@@ -218,7 +219,7 @@ maxTest = function(X,y,control,theta, betaw){
   for (i in 1:m){
     w0  = w_est[i]
     bw0 = betaw[i, ]
-    skf=Sk2f(X, y, control, bw0, w0, GSt1)
+    skf=.Sk2f(X, y, control, bw0, w0, GSt1)
     I_fai = skf$I_fai
     pi_fai = skf$pi_fai
     pi_cov = skf$pi_cov
@@ -257,7 +258,7 @@ lple_fit = function(X, y, control, se.fit = TRUE, maxT=FALSE) {
   id = 1:n
 
   ## X_fai is the data of the interaction model (H1), estimator is beta(w)
-  X_fai=interaction_X(X, p1)
+  X_fai=.interaction_X(X, p1)
 
   ## estimate beta(w)
   ## set matrix "betaw" to save the coef of Z1 to Zp, 
@@ -282,7 +283,7 @@ lple_fit = function(X, y, control, se.fit = TRUE, maxT=FALSE) {
     w0 = w_est[i]
     wg = K_func(w, w0, h, kernel)
 
-    XR = interaction_X_w0(X, p1, w0)
+    XR = .interaction_X_w0(X, p1, w0)
     fit = coxph(y ~ XR+cluster(id), subset= (wg>0), weights=wg)
     betaw[i, ] = fit$coef
     V = sqrt(diag(vcov(fit)))
@@ -345,7 +346,7 @@ bstrp = function(X, y, control){
   fitH0=coxph(y ~ X)
   exb  = exp(X%*%fitH0$coef) #to be used for residual bootstrap
 
-  X_fai = interaction_X(X, p1)
+  X_fai = .interaction_X(X, p1)
   w = X[ ,ncol(X)]
   n=nrow(X)
   status = y[, 2] #y[ ,1] is time; y[ ,2]is status, to be the initial value

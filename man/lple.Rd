@@ -1,7 +1,12 @@
 \name{lple}
 %- Also NEED an '\alias' for EACH other topic documented here.
+\alias{asymSCB}
+\alias{K_func}
+\alias{ibs}
+\alias{ibs.lple}
 \alias{lple}
 \alias{lple_fit}
+\alias{lple_se}
 \alias{lple.default}
 \alias{lple.formula}
 
@@ -77,9 +82,9 @@ This package was build on code developed by Yicong Liu for simple treatment-biom
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 \seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~
-\code{\link{bhm}},
+%\code{\link{bhm}},
 \code{\link{coxph}},
-\code{\link{lplb.control}}
+\code{\link{lpl.control}}
 \code{\link{print.lple}}
 \code{\link{plot.lple}}
 }

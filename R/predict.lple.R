@@ -1,4 +1,4 @@
-predict.lple = function(object, newdata, newy = NULL) {
+predict.lple = function(object, newdata, newy = NULL, ...) {
   beta = object$beta_w
   gw   = object$g_w
   w    = object$w_est
@@ -42,7 +42,7 @@ predict.lple = function(object, newdata, newy = NULL) {
     ## rcumsum is used to calculate at risk observation for ordered time
     time   = newy[, 1]  #time
     status = newy[, 2]  #status
-    result$pe = -sum(status*(lp - log(rcumsum(risk))))
+    result$pe = -sum(status*(lp - log(.rcumsum(risk))))
 
     #### prediction error based on martingle residual, may not work as good
     chz = .appxf(sfit$cumhaz, x=sfit$time, xout=time)
@@ -59,7 +59,8 @@ predict.lple = function(object, newdata, newy = NULL) {
   return(result)
 }
 ### baseline cumulative hazard function and martingale residuals for LPLE
-survfit.lple = function(object, se.fit=TRUE, conf.int = .95) {
+survfit.lple = function(formula, se.fit=TRUE, conf.int = .95, ...) {
+  object = formula
   beta = object$beta_w
   gw   = object$g_w
   w    = object$w_est
@@ -85,7 +86,7 @@ survfit.lple = function(object, se.fit=TRUE, conf.int = .95) {
 
   lp  = rowSums(Z*bnw) + gnw
   exb = exp(lp)
-  rxb = rcumsum(exb)         #sum over risk set using reverse cumsum
+  rxb = .rcumsum(exb)         #sum over risk set using reverse cumsum
   haz = nevent/rxb           #hazard function
   varhaz = nevent/rxb^2      #var for haz
   cumhaz = cumsum(haz)       #Breslow estimate of cumulative hazard
@@ -115,7 +116,7 @@ survfit.lple = function(object, se.fit=TRUE, conf.int = .95) {
 
 
 ### Residuals of LPLE 
-residuals.lple = function(object, type=c("martingale", "deviance")) {
+residuals.lple = function(object, type=c("martingale", "deviance"), ...) {
   type = match.arg(type)
   sfit = survfit(object, se.fit = FALSE)
   rr = sfit$residuals
