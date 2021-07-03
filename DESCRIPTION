@@ -1,11 +1,11 @@
 Package: lpl
 Type: Package
-Title: Local partial likelihood estimator and simultanenous confidence bands
+Title: Local Partial Likelihood Estimation and Simultaneous Confidence Band
 Version: 0.11
 Date: 2021-07-02
 Author: Bingshu Chen [aut, cre], Yicong Liu [aut], Siwei Zhang [aut], Teng Wen [aut]
 Maintainer: Bingshu E. Chen <bingshu.chen@queensu.ca>
 Depends: R (>= 3.5.0), parallel, survival
-Description: Local Partial Likelihood (LPL) is a set of tools to test multivariate covariates-biomatker interactions for survival data. Test for treatment-biomarker interaction using the bootstrap method and the asymptotic method with simultaneous confidence band.
+Description: Local partial likelihood estimation and simultaneous confidence band is a set of tools to test the covariates-biomarker interaction for survival data. Test for the covariates-biomarker interaction using the bootstrap method and the asymptotic method with simultaneous confidence band.
 License: GPL-2
 LazyLoad: yes

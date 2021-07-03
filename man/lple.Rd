@@ -92,4 +92,5 @@ This package was build on code developed by Yicong Liu for simple treatment-biom
 ## fit1 = lple(Surv(time, status)~z1 + z2 + w, data = dat, B = B, p1 = 2)
 ## print(fit1)
 }
-\keyword{ Biomarker interaction, local partial likelihood, bootstrap}
+\keyword{biomarker interaction}
+\keyword{local partial likelihood}
