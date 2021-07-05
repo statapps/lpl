@@ -3,9 +3,9 @@
 #getwd()
 
 ########Load library and functions
-library(parallel)
-library(survival)
-library(MASS)
+#library(parallel)
+#library(survival)
+#library(MASS)
 
 #source('lplb_basicFunctions.R')
 

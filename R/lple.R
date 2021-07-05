@@ -1,6 +1,6 @@
 ########Load library and functions
-library(survival)
-library(MASS)
+#library(survival)
+#library(MASS)
 
 lple <- function(x, ...) UseMethod("lple")
 

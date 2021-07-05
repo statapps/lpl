@@ -1,6 +1,7 @@
 exportPattern("^[[:alpha:]]+")
 import(parallel)
 import(survival)
+import(MASS)
 
 importFrom("graphics", "par")
 importFrom("stats", "approx", "dnorm", "ecdf", "integrate", "model.frame",
