@@ -68,6 +68,9 @@ plot.lple = function(x, ..., scale = c('original', 'transformed')) {
   w_q = quantile(x$w, probs = x$w_est)
   w = switch(scale, original = w_q, transformed = x$w_est)
 
+  oldpar <- par(no.readonly = TRUE)    	# save old par 
+  on.exit(par(oldpar))            	# restore par
+
   if(p1 == 1) {
     par(mfrow = c(1, 1))
     plot(w, bw, ..., main = bw_names[1], type = 'l')
