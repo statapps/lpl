@@ -15,6 +15,7 @@ print are used to provide a short summary of lple outputs.
   \item{x}{the results of a lple fit}
   \item{\dots}{other options used in print()}
 }
+\value{No return value, called for printing model fit}
 \details{
   print.lple is called to print object or summary of object from the lple model \code{\link{lple}}.
 
@@ -27,7 +28,7 @@ print are used to provide a short summary of lple outputs.
 }
 \examples{
 #
-#  print(fit)
+# see example in lple
 #
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

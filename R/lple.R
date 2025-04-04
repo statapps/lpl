@@ -114,8 +114,8 @@ plot.lple = function(x, ..., scale = c('original', 'transformed')) {
   Sm = matrix(1, n, n)
   Sm[lower.tri(Sm)] = 0
        
-  rcumsum <- function(x) rev(cumsum(rev(x)))
-  s0 = rcumsum(exb*weights)
+  ###rcumsum <- function(x) rev(cumsum(rev(x)))
+  s0 = .rcumsum(exb*weights)
   s1 = Sm%*%((X)*as.vector(exb*weights))
   sc = (X-s1/s0)*as.vector(weights*status)
   V = t(sc)%*%sc

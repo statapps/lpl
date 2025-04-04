@@ -18,6 +18,7 @@ Draw a series of plots of beta_w vs. w_est for each dependent variable with inte
   \item{scale}{choose the scale of biomarker variable, 'original' or 'o' for the original biomarker scale. 'transformed' or 't' for transformed scale that mapps biomarker to interval (0, 1). The default is to plot in the original scale.}
   \item{\dots}{other options used in plot().}
 }
+\value{No return value, called for plot model fit}
 \details{
 plot.lple is called to plot the relationships between beta_w and w_est for each dependent variable with interactions with the biomarker w, from the \code{\link{lple}} fit model.
 
@@ -35,10 +36,11 @@ The default method, print.default has its own help page. Use methods("print") to
 \code{\link{print.lple}}
 }
 \examples{
-#
-# fit = lplb(y ~ x)
-# plot(fit)
-#
+  \donttest{
+    dat = lplDemoData(50)
+    fit = lple(Surv(time, status)~z1 + w, data = dat, p1 = 1)
+    plot(fit)
+  }
 }
 
 \keyword{plot}

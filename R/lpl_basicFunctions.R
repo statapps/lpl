@@ -387,3 +387,22 @@ bstrp = function(X, y, control){
   cat('DONE!\n')
   return(mTstar)
 }
+
+lplDemoData = function(n) {
+  w = runif(n, 0, 1)
+  z1 = rbinom(n, 1, 0.5)
+  z2 = rbinom(n, 1, 0.5) 
+  lp = log(2.5)*z1*w*(1-w) + 1.5*z2*sin(2*pi*w)
+  h0 = 0.5
+  eb = h0*exp(lp)
+
+  stime = rexp(n, eb)
+  endstudy = runif(n, 0, 5)        
+  cstatus = ifelse(stime>endstudy, 0, 1) ##Censored at end of study time.
+  #cat('\nCensoring: ', 1-mean(cstatus), '\n')
+  stime = ifelse(stime>endstudy, endstudy, stime)
+  dat = cbind(time=stime, status=cstatus, z1=z1, z2 = z2, w=w)
+  dat = data.frame(dat)
+  return(dat)
+
+}

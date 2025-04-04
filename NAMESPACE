@@ -6,7 +6,7 @@ import(MASS)
 importFrom("graphics", "par")
 importFrom("stats", "approx", "dnorm", "ecdf", "integrate", "model.frame",
            "model.matrix", "model.response", "predict", "qnorm",
-           "quantile", "residuals", "vcov")
+           "quantile", "rbinom", "residuals", "rexp", "runif", "vcov")
 
 S3method(ibs, lple)
 

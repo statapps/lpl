@@ -35,17 +35,17 @@ survfit.lple returns a list of predicted baseline survival function, cumulative 
   \item{residuals}{Martingale residuals of the (lple) model.} 
   \item{std.err}{Standard error for the cumulative hazard function, if se.fit = TRUE.}
 
-See \code{\link{survfit}} for more detail about other output values such as upper, lower, conf.type. 
+See \code{\link[survival]{survfit}} for more detail about other output values such as upper, lower, conf.type. 
 Confidence interval is based on log-transformation of survival function. 
 }
 \author{Bingshu E. Chen}
 \seealso{
- The default method for survfit \code{\link{survfit}},
+ The default method for survfit \code{\link[survival]{survfit}},
 #\code{\link{survfit.lple}}
 }
 \examples{
 #
-#  survfit(fit, se.fit = FALSE)
+# See example in lple
 #
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

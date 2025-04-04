@@ -4,6 +4,7 @@
 \alias{K_func}
 \alias{ibs}
 \alias{ibs.lple}
+\alias{lplDemoData}
 \alias{lple}
 \alias{lple_fit}
 \alias{lple_se}
@@ -82,15 +83,17 @@ This package was build on code developed by Yicong Liu for simple treatment-biom
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 \seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~
-%\code{\link{bhm}},
-\code{\link{coxph}},
+\code{\link[survival]{coxph}},
 \code{\link{lpl.control}}
 \code{\link{print.lple}}
 \code{\link{plot.lple}}
 }
 \examples{
-## fit1 = lple(Surv(time, status)~z1 + z2 + w, data = dat, B = B, p1 = 2)
-## print(fit1)
+dat = lplDemoData(50)
+fit = lple(Surv(time, status)~z1 + w, data = dat, p1 = 1)
+print(fit)
+predict(fit)
+survfit(fit, se.fit = FALSE)
 }
 \keyword{biomarker interaction}
 \keyword{local partial likelihood}

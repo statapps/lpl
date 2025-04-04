@@ -75,7 +75,7 @@ lplb.formula <- function(formula, data=list(...), control = list(...), ...){
   
   y <- model.response(mf)
   
-  control = do.call("lplb.control", control)
+  control = do.call("lpl.control", control)
   
   fit <- lplb.default(x, y, control)
   fit$call <- match.call()

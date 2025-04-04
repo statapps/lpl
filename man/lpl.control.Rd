@@ -33,16 +33,15 @@ This function checks the internal consisitency and returns a list of value as in
 \code{\link{lple}}
 }
 \examples{
-## The default control values are: h = 0.2, kernel = 'gaussian', B = 200, w0 = seq(0.05, 0.95, 0.025), p1 = 1, pctl = seq(0.2, 0.8, 0.1) 
+## The default control values are: h = 0.2, kernel = 'gaussian', B = 200,
+## w0 = seq(0.05, 0.95, 0.025), p1 = 1, pctl = seq(0.2, 0.8, 0.1) 
 ##
 ## To fit the lpl model with some control variables changed, 
 
-w0=seq(0.03,0.97,by=2/100)
+w0=seq(0.05, 0.95, by=0.05)
 ctl = lpl.control(w0=w0, h=0.3, p1=2, B=100)
 
-## then fit the following model
-
-#fit = lpl(x, y, control = ctl)
+## then fit the lple model
 }
 \keyword{ control }
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

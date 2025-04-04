@@ -79,14 +79,15 @@ This package was build on code developed by Yicong Liu for simple treatment-biom
 \seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 %\code{\link{bhm}},
-\code{\link{coxph}},
+\code{\link[survival]{coxph}},
 \code{\link{lpl.control}}
 \code{\link{print.lple}}
 \code{\link{plot.lple}}
 }
 \examples{
-## fit1 = lplb(Surv(time, status)~z1 + z2 + w, data = dat, B = B, p1 = 2)
-## print(fit1)
+ dat = lplDemoData(50)
+ fit = lplb(Surv(time, status)~z1 + z2 + w, data = dat, B = 3, p1 = 2)
+ print(fit)
 }
 \keyword{biomarker interaction }
 \keyword{bootstrap }

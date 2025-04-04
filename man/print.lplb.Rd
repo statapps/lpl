@@ -15,6 +15,9 @@ print are used to provide a short summary of lplb outputs.
   \item{x}{a lplb class returned from lplb fit}
   \item{\dots}{other options used in print()}
 }
+
+\value{No return value, called for printing model fit}
+
 \details{
   print.lplb is called to print object or summary of object from the lplb model \code{\link{lplb}}.
 
@@ -27,7 +30,7 @@ print are used to provide a short summary of lplb outputs.
 }
 \examples{
 #
-#  print(fit)
+#  See examples in lplb and lple
 #
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
