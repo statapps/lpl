@@ -4,11 +4,15 @@ import(survival)
 import(MASS)
 
 importFrom("graphics", "par")
+importFrom("methods", "is")
 importFrom("stats", "approx", "dnorm", "ecdf", "integrate", "model.frame",
            "model.matrix", "model.response", "predict", "qnorm",
            "quantile", "rbinom", "residuals", "rexp", "runif", "vcov")
 
+S3method(ibs, coxph)
+S3method(ibs, default)
 S3method(ibs, lple)
+S3method(ibs, Surv)
 
 S3method(lplb, default)
 S3method(lplb, formula)
