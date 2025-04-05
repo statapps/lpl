@@ -13,7 +13,7 @@ ibs.default = function(object, ...) {
   return(sum(bs*ds))
 }
 
-ibs.Surv = function(object, survProb) {
+ibs.Surv = function(object, survProb, ...) {
   ### sort by time
   idx    = order(object[, 1])
   St     = survProb[idx, ]
@@ -99,6 +99,7 @@ ibs.lple = function(object, newdata=NULL, newy = NULL, ...) {
 }
 
 ### helper functions: IPCW, brier
+ipcw = function(time, event) {IPCW(Surv(time, event))}
 IPCW = function(object) {
   time = object[, 1]
   cnsr = 1 - object[, 2]

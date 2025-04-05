@@ -2,8 +2,6 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \alias{asymSCB}
 \alias{K_func}
-\alias{ibs}
-\alias{ibs.lple}
 \alias{lplDemoData}
 \alias{lple}
 \alias{lple_fit}
