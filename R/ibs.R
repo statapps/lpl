@@ -49,12 +49,17 @@ ibs.coxph = function(object, newdata = NULL, newy = NULL, ...) {
   if (length(newdata[, 1]) != length(newy[, 1]))
     stop("New data and new y must have same number of observations.")
 
-  ### St = exp(-H(t)*exp(x*beta)) nxn matrix, one row for S(t) subject i
-  hr = exp(predict(object, newdata))  ### hazard ratio = exp(linear predictor)
-  sf = survfit(object)                ### to find the baseline cumhaz
-  St = exp(-hr %*% t(sf$cumhaz))
+  ### sort the newdata and newy for the IBS calculation    
+  idx = order(newy[, 1])
+  Y   = newy[idx, ]
+  X   = newdata[idx, ]
 
-  return(ibs(newy, St))
+  hr  = exp(X%*%(object$coefficients))    ### hazard ratio = exp(linear predictor)
+  HZ  = basehaz(object, centered = FALSE) ### to find the baseline cumhaz
+  tau = max(HZ$time, Y[, 1])
+  chz = approxfun(c(0, HZ$time, tau), c(0, HZ$hazard, max(HZ$hazard)))
+  St  = exp(-hr %*% chz(Y[, 1]))
+  return(ibs(Y, St))
 }
 
 ibs.lple = function(object, newdata=NULL, newy = NULL, ...) {
