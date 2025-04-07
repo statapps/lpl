@@ -41,7 +41,7 @@ ibs.Surv = function(object, survProb, ...) {
 ibs.coxph = function(object, newdata = NULL, newy = NULL, ...) {
   y = object$y
   if (is.null(newdata)) {
-    newdata = data.frame(object$x)
+    newdata = object$x
     newy = y
   }
   else if (is.null(newy))
