@@ -26,5 +26,10 @@ S3method(print, lple)
 S3method(plot, lple)
 
 S3method(predict, lple)
+
+S3method(rmst, coxph)
+S3method(rmst, default)
+S3method(rmst, Surv)
+
 S3method(residuals, lple)
 S3method(survfit, lple)

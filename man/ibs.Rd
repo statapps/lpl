@@ -10,8 +10,7 @@
 The Brier Score and Integrated Brier Score (IBS)
 }
 \description{
-Create the Inverse Probability of Censoring Weighting (IPCW) using the Kaplan-Meier (KM) method.
-print are used to provide a short summary of lple outputs.
+Calculate the Brier score and the integration of the brier score (IBS) using the Inverse Probability of Censoring Weighting (IPCW) method.
 }
 \usage{
 brier(object, St, tau)
@@ -34,16 +33,43 @@ brier(object, St, tau)
 }
 \value{A value of the Brier score or integration of the Brier score is returned.}
 \details{
-  \code{\link[survival]{survfit}} is called to fit a KM model for the censoring time.
+  The Brier score is the mean square difference between the true survival status and the predicted survival function.
+  The Brier score is defined as,
+
+    bs(tau) = 1/n*I(T_i>tau, delta_i = 1) S(t)^2/G(T_i) + (1-S(tau))^2/G(tau),
+
+  where G = IPCW(Surv(time, event)), and \code{\link{IPCW}} is called to fit a KM model for the censoring time.
+
+  The IBS is an integrated brier score over time. That is an integrated weighted squared distance 
+  between the estimated survival function and the empirical survival function int_0 ^ 2 (I(T > t) - S(t))^2dt. 
+  The inverse probability censoring weighting(\code{\link{IPCW}}) is used to adjust for censoring.
 }
 \author{Bingshu E. Chen}
 \seealso{
- The ibs function is used in \code{\link{brier}} to calculate the brier score and \code{\link{ibs}} to calculate the 
- integrated brier score.
+ The \code{\link{IPCW}} method is used calculate the Brier score and the integrated brier score. 
+ A Cox proportional hazards (PH) model (\code{\link[survival]{coxph}}) shall be fitted to calculate Brier and IBS for the Cox PH model.
+}
+\references{
+  1. Brier, G. W. (1950). Verification of forecasts expressed in terms of probability. Monthly Weather Review, 78.
+
+  2. Graf, Erika, Schmoor, Claudia, Sauerbrei, & Willi, et al. (1999). Assessment and comparison of prognostic classification schemes for survival data. Statistics in Medicine, 18, 2529-2545.
 }
 \examples{
-# See example in brier ibs
+  set.seed(29)
+  n     = 25
+  time  = rexp(n, 1)
+  event = rbinom(n, 1, 0.75)
+
+  ### calculate the brier score at tau
+  tau   = 0.5
+  St    = pexp(rep(tau, n), 1, lower.tail = FALSE)
+  bs    = brier(Surv(time, event), St, tau)
+
+  ### calculate the integrated brier score
+  #fit   = coxph(Surv(time, event)~1)
+  #IBS  = ibs(fit)
 }
+
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{ IPCW }
