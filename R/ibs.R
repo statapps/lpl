@@ -9,7 +9,7 @@ ibs.default = function(object, ...) {
   ds = diff(c(0, tm))
   n  = length(tm)
   bs = rep(0, n)
-  for(i in 1:n) bs[i] = brier(y, rep(St[i], n), tm[i])
+  for(i in 1:n) bs[i] = brierScore(y, rep(St[i], n), tm[i])
   return(sum(bs*ds))
 }
 
@@ -103,7 +103,7 @@ ibs.lple = function(object, newdata=NULL, newy = NULL, ...) {
   return(sum(BSt*dt))
 }
 
-### helper functions: IPCW, brier
+### helper functions: IPCW, brierScore
 ipcw = function(time, event) {IPCW(Surv(time, event))}
 IPCW = function(object) {
   time = object[, 1]
@@ -115,7 +115,7 @@ IPCW = function(object) {
   return(G)
 }
 
-brier = function(object, St, tau) {
+brierScore = function(object, St, tau) {
 # formula I(T<=tau)*(0 - S(tau))^2*delta/G(T) + I(T>tau)*(1-S(tau))^2/G(tau)
 # object: Surv(time, event), St: Survival function at tau.
   idx = order(object[, 1])

@@ -1,5 +1,5 @@
 \name{ibs}
-\alias{brier}
+\alias{brierScore}
 \alias{ibs}
 \alias{ibs.coxph}
 \alias{ibs.default}
@@ -10,10 +10,10 @@
 The Brier Score and Integrated Brier Score (IBS)
 }
 \description{
-Calculate the Brier score and the integration of the brier score (IBS) using the Inverse Probability of Censoring Weighting (IPCW) method.
+Calculate the Brier score and the integration of the Brier score (IBS) using the Inverse Probability of Censoring Weighting (IPCW) method.
 }
 \usage{
-brier(object, St, tau)
+brierScore(object, St, tau)
 \method{ibs}{default}(object, ...)
 \method{ibs}{coxph}(object, newdata = NULL, newy = NULL, ...)
 \method{ibs}{lple}(object, newdata = NULL, newy = NULL, ...)
@@ -40,14 +40,16 @@ brier(object, St, tau)
 
   where G = IPCW(Surv(time, event)), and \code{\link{IPCW}} is called to fit a KM model for the censoring time.
 
-  The IBS is an integrated brier score over time. That is an integrated weighted squared distance 
+  The IBS is an integrated Brier Score over time. That is an integrated weighted squared distance 
   between the estimated survival function and the empirical survival function int_0 ^ 2 (I(T > t) - S(t))^2dt. 
   The inverse probability censoring weighting(\code{\link{IPCW}}) is used to adjust for censoring.
 }
 \author{Bingshu E. Chen}
 \seealso{
- The \code{\link{IPCW}} method is used calculate the Brier score and the integrated brier score. 
+ The \code{\link{IPCW}} method is used calculate the Brier score and the integrated Brier score. 
  A Cox proportional hazards (PH) model (\code{\link[survival]{coxph}}) shall be fitted to calculate Brier and IBS for the Cox PH model.
+
+ The Brier score for the Cox model can also be calculated by \code{\link[survival]{brier}}.
 }
 \references{
   1. Brier, G. W. (1950). Verification of forecasts expressed in terms of probability. Monthly Weather Review, 78.
@@ -60,12 +62,12 @@ brier(object, St, tau)
   time  = rexp(n, 1)
   event = rbinom(n, 1, 0.75)
 
-  ### calculate the brier score at tau
+  ### calculate the Brier score at time tau
   tau   = 0.5
   St    = pexp(rep(tau, n), 1, lower.tail = FALSE)
-  bs    = brier(Surv(time, event), St, tau)
+  bs    = Brier(Surv(time, event), St, tau)
 
-  ### calculate the integrated brier score
+  ### calculate the integrated Brier score
   #fit   = coxph(Surv(time, event)~1)
   #IBS  = ibs(fit)
 }
