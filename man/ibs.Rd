@@ -65,7 +65,7 @@ brierScore(object, St, tau)
   ### calculate the Brier score at time tau
   tau   = 0.5
   St    = pexp(rep(tau, n), 1, lower.tail = FALSE)
-  bs    = Brier(Surv(time, event), St, tau)
+  bs    = brierScore(Surv(time, event), St, tau)
 
   ### calculate the integrated Brier score
   #fit   = coxph(Surv(time, event)~1)
