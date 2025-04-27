@@ -122,10 +122,10 @@ multiRoot = function(func, theta,..., verbose = FALSE, maxIter = 50,
 
 coxScoreHess = function(X, y, exb, hess = FALSE) {
   ### exb = exp(X%*%beta)
-  ### delta shall be sorted from smallest to largest.
+  ### delta shall be sorted from largest to smallest to avoid using rcumsum.
   y1    = y[, 1]
   delta = y[, 2]
-  if((y1[1] > y1[2]) | (y1[2] > y1[length(y1)])) stop("Sort survival time from smallest to largest")
+  if((y1[1] < y1[2]) | (y1[2] < y1[length(y1)])) stop("Sort survival time from the largest to the smallest")
 
   S0 = cumsum(exb)
   S1 = apply(exb*X, 2, cumsum)

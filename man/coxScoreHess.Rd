@@ -20,7 +20,7 @@
     \item{H}{a p x p hessian matrix.}
 }
 
-\details{The survival time shall be sorted from the smallest to the largest, an error will occur if y is not sorted.
+\details{The survival time shall be sorted from the largest to the smallest, an error will occur if y is not sorted.
 
      score = sum(event*(X - S1/S))
 
