@@ -120,11 +120,15 @@ multiRoot = function(func, theta,..., verbose = FALSE, maxIter = 50,
 #reverse rcumsum can be avoided if scored largest time to smallest time
 #rcumsum=function(x) rev(cumsum(rev(x))) # sum from last to first
 
-coxScoreHess = function(eb, delta, X, hess = FALSE) {
-  ### eb = exp(x%*%beta)
+coxScoreHess = function(X, y, exb, hess = FALSE) {
+  ### exb = exp(X%*%beta)
   ### delta shall be sorted from smallest to largest.
-  S0 = cumsum(eb)
-  S1 = apply(eb*X, 2, cumsum)
+  y1    = y[, 1]
+  delta = y[, 2]
+  if((y1[1] > y1[2]) | (y1[2] > y1[length(y1)])) stop("Sort survival time from smallest to largest")
+
+  S0 = cumsum(exb)
+  S1 = apply(exb*X, 2, cumsum)
   SX = delta * (X - S1/S0)
   score = colSums(SX)
   if(!hess) return(score)
@@ -139,9 +143,9 @@ coxScoreHess = function(eb, delta, X, hess = FALSE) {
 
   Xt = apply(X, 1, function(x){return(x%*%t(x))})                    # X*t(X)
   X2 = array(Xt, c(p, p, n))
-  ## multiply each X2(p, p, i) with eb[i],
-  ## by change eb to a p*p*n array with each of ith pxp matrix = eb[i]
-  X2eb = X2 * array(rep(eb, each = p*p), c(p, p, n))
+  ## multiply each X2(p, p, i) with exb[i],
+  ## by change exb to a p*p*n array with each of ith p x p matrix = exb[i]
+  X2eb = X2 * array(rep(exb, each = p*p), c(p, p, n))
 
   ## Sm is a upper triangular matrix of 1
   Sm = matrix(1, n, n)

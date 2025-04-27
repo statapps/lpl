@@ -1,7 +1,6 @@
 \name{numScore}
 \alias{numScore}
 \alias{numJacobian}
-\alias{coxScoreHess}
 
 \title{Calculate the Score / Jacobian Function}
 \description{Calculate a numerical approximation to the Score function of a 
