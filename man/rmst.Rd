@@ -1,5 +1,6 @@
 \name{rmst}
 \alias{rmst}
+\alias{rmstFit}
 \alias{rmst.coxph}
 \alias{rmst.default}
 \alias{rmst.Surv}

@@ -10,8 +10,8 @@ rmst.default = function(object, ...) {
 }
 
 ### Restricted mean survival time
-.rmstFit = function(tau, h0 = NULL, H0 = function(x){x}) {
-  rms = integrate(.psurv, 0, tau, h0=h0, H0 = H0, low.tail = FALSE)$value
+rmstFit = function(tau, h0 = NULL, H0 = function(x){x}) {
+  rms = integrate(psurv, 0, tau, h0=h0, H0 = H0, low.tail = FALSE)$value
   return(rms)
 }
 
@@ -24,7 +24,7 @@ rmst.coxph = function(object, newdata=NULL, linear.predictors = NULL, tau=NULL, 
 
   rmsfunlp = function(lp, tm, chz, tau) {
     Ht = approxfun(tm, chz*exp(lp), rule = 2)
-    return(.rmstFit(tau, H0 = Ht))
+    return(rmstFit(tau, H0 = Ht))
   }
 
   if(is.null(newdata)) {
@@ -53,19 +53,19 @@ rmst.Surv = function(object, tau = NULL, ...) {
 }
 
 ### psurv from dnn package, can be deleted in the future.
-.psurv = function(q, h0 = NULL, H0 = function(x){x}, low.tail=TRUE, log.p=FALSE) {
-  H = function(t) { integrate(h0, 0, t, subdivisions = 500L)$value }
-  if(!is.null(h0)) Ht = vapply(q, H, 1)
-  else Ht = vapply(q, H0, 1)
-
-  if(low.tail) {
-    if (log.p) return(Ht)
-    else return(1-exp(-Ht))
-  } else {
-    if (log.p) return(-Ht)
-    else return(exp(-Ht))
-  }
-}
+#.psurv = function(q, h0 = NULL, H0 = function(x){x}, low.tail=TRUE, log.p=FALSE) {
+#  H = function(t) { integrate(h0, 0, t, subdivisions = 500L)$value }
+#  if(!is.null(h0)) Ht = vapply(q, H, 1)
+#  else Ht = vapply(q, H0, 1)
+#
+#  if(low.tail) {
+#    if (log.p) return(Ht)
+#    else return(1-exp(-Ht))
+#  } else {
+#    if (log.p) return(-Ht)
+#    else return(exp(-Ht))
+#  }
+#}
 
 ### example for rmst
 #n     = 29
