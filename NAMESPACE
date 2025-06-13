@@ -7,7 +7,7 @@ importFrom("graphics", "par")
 importFrom("methods", "is")
 importFrom("stats", "approx", "approxfun", "dnorm", "ecdf", "integrate", "model.frame",
            "model.matrix", "model.response", "predict", "qnorm",
-           "quantile", "rbinom", "residuals", "rexp", "runif", "vcov")
+           "quantile", "rbinom", "residuals", "rexp", "runif", "uniroot", "vcov")
 
 S3method(ibs, coxph)
 S3method(ibs, default)
