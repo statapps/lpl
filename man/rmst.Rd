@@ -13,6 +13,7 @@ Calculate the restricted mean survival time (RMST) for Surv object, Cox proporti
 }
 \usage{
 rmst(object, ...)
+rmstFit(tau, h0 = NULL, H0 = function(x){x})
 \method{rmst}{default}(object, ...)
 \method{rmst}{coxph}(object, newdata = NULL, linear.predictors = NULL, tau=NULL, ...)
 \method{rmst}{Surv}(object, tau = NULL, ...)
@@ -21,9 +22,11 @@ rmst(object, ...)
 \arguments{
   \item{object}{for rmst.Surv and rmst.default, it is a survival object created by Surv(time, event). 
         For others, it is a model object returned by coxph, lple.}
+  \item{h0}{a hazard function to be used for restricted mean survival time calculation. If h0(t) is provided, then H0(t) will be ignored.}
+  \item{H0}{a cumulative hazard function to be used for restricted mean survival time calculation. The default is H0(t) = t for t>0}
   \item{linear.predictors}{the linear predictor from the Cox PH model.}
   \item{newdata}{optional new data at which the RMST is calculated. If absent, RMST is for the dataframe used in the original model fit.}
-  \item{tau}{the time point at which the Brier score is calculated.}
+  \item{tau}{the time point at which the restricted mean survival time is calculated.}
   \item{\dots}{additional arguments to be passed to the functions such as rmst.coxph, rmst.lple, rmst.Surv etc.}
 }
 \value{A value of the Brier score or integration of the Brier score is returned.}
@@ -34,6 +37,8 @@ rmst(object, ...)
     RMST(tau) = E(min(T, tau)) = int_0 ^tau S(t)dt,
 
   where S(t) = P(T>t) is the survival function of the random variable T.
+
+  rmstFit(tau, h0, H0) calculates the restricted mean survival time based on a hazard (or cumulative hazard) function. Only one function of either h0(t) or H0(t) is required. If h0(t) is provided, then H0(t) will be ignored. 
 }
 \author{Bingshu E. Chen}
 \seealso{

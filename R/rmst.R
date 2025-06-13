@@ -9,7 +9,7 @@ rmst.default = function(object, ...) {
   return(rmst(object$y, ...))
 }
 
-### Restricted mean survival time
+### Restricted mean survival time based on a hazard (or cumulative hazard) function
 rmstFit = function(tau, h0 = NULL, H0 = function(x){x}) {
   rms = integrate(psurv, 0, tau, h0=h0, H0 = H0, low.tail = FALSE)$value
   return(rms)
