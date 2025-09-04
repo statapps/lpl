@@ -158,8 +158,8 @@ coxScoreHess = function(X, y, exb, hess = FALSE) {
   return(list(score = score, Sigma = Sigma, H = H))
 }
 
-### coxpl to calculate the logarithm of the partial likelihood for the Cox PH model
-coxpl = function(X, y, beta, offset = NULL, sorted = FALSE) {
+### coxlogLik to calculate the logarithm of the partial likelihood for the Cox PH model
+coxlogLik = function(X, y, beta, offset = NULL, sorted = FALSE) {
   ### sort the time and data
   ### if the function to be called multiple times for the same y,
   ### sort the data by y outside of this function and use sorted=TRUE
@@ -178,6 +178,6 @@ coxpl = function(X, y, beta, offset = NULL, sorted = FALSE) {
   exb = exp(X%*%beta)
   if(!is.null(offset)) exb = exb*exp(offset)
   S0 = cumsum(exb)
-  logPL = sum(event * log(exb/S0))
-  return(logPL)
+  logLik = sum(event * log(exb/S0))
+  return(logLik)
 }
