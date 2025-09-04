@@ -157,3 +157,27 @@ coxScoreHess = function(X, y, exb, hess = FALSE) {
   H = colSums(delta*(S2/c(S0)-SS1/c(S0)^2), dims = 1)
   return(list(score = score, Sigma = Sigma, H = H))
 }
+
+### coxpl to calculate the logarithm of the partial likelihood for the Cox PH model
+coxpl = function(X, y, beta, offset = NULL, sorted = FALSE) {
+  ### sort the time and data
+  ### if the function to be called multiple times for the same y,
+  ### sort the data by y outside of this function and use sorted=TRUE
+  ### to speed up the algorithm
+  if(!sorted) {
+    time = y[, 1]
+    idx = order(time, decreasing = TRUE)
+    X = X[idx, ]
+    y = y[idx, ]
+    if(!is.null(offset)) offset = offset[idx]
+    #time = time[idx] ### once sorted, time does not contribute to coxpl
+  }
+
+  #####
+  event = y[, 2]
+  exb = exp(X%*%beta)
+  if(!is.null(offset)) exb = exb*exp(offset)
+  S0 = cumsum(exb)
+  logPL = sum(event * log(exb/S0))
+  return(logPL)
+}

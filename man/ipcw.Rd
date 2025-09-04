@@ -25,7 +25,7 @@ ipcw(time, event)
 }
 \author{Bingshu E. Chen}
 \seealso{
- The IPCW function is used in \code{\link{brier}} to calculate the brier score and \code{\link{ibs}} to calculate the 
+ The IPCW function is used in \code{\link{brierScore}} to calculate the brier score and \code{\link{ibs}} to calculate the 
  integrated brier score.
 }
 \examples{

@@ -1,8 +1,8 @@
 Package: lpl
 Type: Package
 Title: Local Partial Likelihood Estimation and Simultaneous Confidence Band
-Version: 0.12
-Date: 2025-04-01
+Version: 0.14
+Date: 2025-08-29
 Author: Bingshu E. Chen [aut, cre], Yicong Liu [aut], Siwei Zhang [aut], Teng Wen [aut], Wenyu Jiang [aut]
 Maintainer: Bingshu E. Chen <bingshu.chen@queensu.ca>
 Authors@R: c(person(given = c("Bingshu", "E."), family = "Chen", role = c("aut", "cre"), email = "bingshu.chen@queensu.ca"),
