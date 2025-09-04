@@ -1,12 +1,12 @@
 \name{coxScoreHess}
 \alias{coxScoreHess}
-\alias{coxpl}
+\alias{coxlogLik}
 
 \title{Calculate the Score vector / Hessian matrix for the Cox model}
 \description{Calculate the Score vector or the Hessian matrix for the Cox proportional hazards model with inputs of covariates, survival outcomes and the relative risks}
 \usage{
     coxScoreHess(X, y, exb, hess = FALSE)
-    coxpl(X, y, beta, sorted = FALSE)
+    coxplogLik(X, y, beta, offset = NULL, sorted = FALSE)
 }
 \arguments{
     \item{X}{the covariate matrix from model.matrix, without the interecpt term.}
@@ -14,6 +14,8 @@
     \item{exb}{exb is the relative risks with exb = exp(X*beta).}
     \item{hess}{output the Hessian matrix, with hess = FALSE as the default, which outputs the score vector only.}
     \item{beta}{the p x 1 regression coefficient to be used in calculation of the partial likelihood.}
+    \item{offset}{offset term to be added to the linear predictor, such as in a generalised linear model 
+          or a Cox model, with known coefficient 1 rather than an estimated coefficient.}
     \item{sorted}{data were sorted by time from the largest to the smallest, to speed up the algorithm, default is sorted = FALSE, sort by time is recommand when the function will be called multiple times for the same y.}
 }
 \value{An p by 1 vector of the score of the function calculated at the 
@@ -22,6 +24,7 @@
     \item{score}{a 1 x p score vector.}
     \item{Sigma}{a p x p matrix for the empirical varaince of the score.}
     \item{H}{a p x p hessian matrix.}
+    \item{logLik} {a scale value of the logarithm of the partial likelihood is returneby by coxlogLik}
 }
 
 \details{The survival time shall be sorted from the largest to the smallest, an error will occur if y is not sorted.
@@ -44,4 +47,19 @@
 }
 
 %this is a simple function, no example is needed here.
-%\examples{}
+\examples{
+  n = 5
+  x = matrix(runif(n*3), nrow = n)
+  y = Surv(runif(n), rbinom(n, 1, 0.7))
+  ### offset term
+  ot= runif(n)
+  ### fit the coxph model
+  #fit = coxph(y~x+offset(ost))
+  #beta = fit$coefficients
+  beta = c(0.3, 0.4, 0.5)
+  #cat("The Cox partial likelihood for the fitted coxph model:\n")
+  #print(logLik(fit))
+  cat("The Cox partial likelihood using the coxlogLik function:\n", 
+    coxpl(x, y, beta, offset = ot), "\n")
+
+}
