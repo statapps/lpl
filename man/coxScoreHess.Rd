@@ -24,7 +24,7 @@
     \item{score}{a 1 x p score vector.}
     \item{Sigma}{a p x p matrix for the empirical varaince of the score.}
     \item{H}{a p x p hessian matrix.}
-    \item{logLik} {a scale value of the logarithm of the partial likelihood is returneby by coxlogLik}
+    \item{logLik}{a scale value of the logarithm of the partial likelihood is returneby by coxlogLik}
 }
 
 \details{The survival time shall be sorted from the largest to the smallest, an error will occur if y is not sorted.
