@@ -33,7 +33,7 @@ numHessian = function(func, theta, h = 0.0001, method = c("fast", "easy"), ...) 
 
   ### easy to understand, evaluate func(...) [4*p*p] times
   if(method == "easy") {
-    #cat("Easy num hessian method\n")
+    message("Easy num hessian method\n")
     sc = function(theta, ...) {
       numScore(func = func, theta = theta, h = h, ...)
     }

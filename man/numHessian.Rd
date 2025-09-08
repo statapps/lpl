@@ -18,13 +18,13 @@ function at a parameter value.}
 }
 \value{An p by p matrix of the Hessian of the function calculated at the 
        point \code{theta}. If the \code{func} is a log likelihood function, 
-       then the negative of the p by p matrix is the information matrix.}
+       then the negative of the p by p matrix is the information matrix.
+}
 
 \details{
-  The function \code{numHessian} calculates an numerical approximation to
-  the p by p second order derivative of a scalar real valued function with p-vector
-  argument theta.
-  This function can be used to check if the information matrix of a log likelihood is correct or not.
+The function \code{numHessian} calculates an numerical approximation to
+the p by p second order derivative of a scalar real valued function with p-vector argument theta.
+This function can be used to check if the information matrix of a log likelihood is correct or not.
 }
 
 \seealso{
