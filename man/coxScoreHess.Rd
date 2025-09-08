@@ -3,10 +3,10 @@
 \alias{coxlogLik}
 
 \title{Calculate the Score vector / Hessian matrix for the Cox model}
-\description{Calculate the Score vector or the Hessian matrix for the Cox proportional hazards model with inputs of covariates, survival outcomes and the relative risks}
+\description{Calculate the partial log Likelihood, Score vector or the Hessian matrix for the Cox proportional hazards model with inputs of covariates, survival outcomes and the relative risks}
 \usage{
+    coxlogLik(X, y, beta, offset = NULL, sorted = FALSE)
     coxScoreHess(X, y, exb, hess = FALSE)
-    coxplogLik(X, y, beta, offset = NULL, sorted = FALSE)
 }
 \arguments{
     \item{X}{the covariate matrix from model.matrix, without the interecpt term.}
@@ -55,11 +55,11 @@
   ot= runif(n)
   ### fit the coxph model
   #fit = coxph(y~x+offset(ost))
-  #beta = fit$coefficients
+  #beta = fit$coefficientspartial 
   beta = c(0.3, 0.4, 0.5)
   #cat("The Cox partial likelihood for the fitted coxph model:\n")
   #print(logLik(fit))
   cat("The Cox partial likelihood using the coxlogLik function:\n", 
-    coxpl(x, y, beta, offset = ot), "\n")
+    coxlogLik(x, y, beta, offset = ot), "\n")
 
 }

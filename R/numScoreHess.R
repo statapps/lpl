@@ -33,7 +33,7 @@ numHessian = function(func, theta, h = 0.0001, method = c("fast", "easy"), ...) 
 
   ### easy to understand, evaluate func(...) [4*p*p] times
   if(method == "easy") {
-    cat("Easy num hessian method\n")
+    #cat("Easy num hessian method\n")
     sc = function(theta, ...) {
       numScore(func = func, theta = theta, h = h, ...)
     }
@@ -46,7 +46,7 @@ numHessian = function(func, theta, h = 0.0001, method = c("fast", "easy"), ...) 
   }
   ### faster, evaluate func(theta, ...) [1 + p + p*p] times
   if (method == "fast") {
-    cat("Fast num hessian method\n")
+    #cat("Fast num hessian method\n")
     f0 = func(theta, ...)
     for(i in 1:p) {
       theta1 = theta; theta2 = theta
@@ -170,7 +170,7 @@ coxlogLik = function(X, y, beta, offset = NULL, sorted = FALSE) {
     X = X[idx, ]
     y = y[idx, ]
     if(!is.null(offset)) offset = offset[idx]
-    #time = time[idx] ### once sorted, time does not contribute to coxpl
+    #time = time[idx] ### once sorted, time does not contribute to coxlogLik
   }
 
   #####
