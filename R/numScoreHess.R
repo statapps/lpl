@@ -181,3 +181,30 @@ coxlogLik = function(X, y, beta, offset = NULL, sorted = FALSE) {
   logLik = sum(event * log(exb/S0))
   return(logLik)
 }
+
+### survfit for the cox model, to replace basehaz, which is hard to use due to centered = TRUE/FALSE
+coxcumhaz = function(y, linear.predictors = NULL, sorted = FALSE) {
+  n = length(y[, 1])
+  
+  if(!is.null(linear.predictors)) exb = exp(linear.predictors)
+  else exb = rep(1, n)
+  
+  if(!sorted) {
+    idx = order(y[, 1], decreasing = TRUE)
+    exb = exb[idx]
+    y = y[idx, ]
+    time = y[, 1]
+  }
+  event = y[, 2]
+  events = sum(event)
+  n.risk = n:1
+  
+  S0 = rcumsum(exb)
+  haz = event/S0
+  cumhaz = cumsum(haz)
+  surv = exp(-cumhaz)
+  fit = cbind(time = time, n.risk = n.risk, hazard = haz, cumhaz = cumhaz, surv = surv)
+  #class(fit) = 'survfit'
+  return(fit)
+}
+
