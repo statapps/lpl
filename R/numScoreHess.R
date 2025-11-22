@@ -190,7 +190,7 @@ coxcumhaz = function(y, linear.predictors = NULL, sorted = FALSE) {
   else exb = rep(1, n)
   
   if(!sorted) {
-    idx = order(y[, 1], decreasing = TRUE)
+    idx = order(y[, 1])
     exb = exb[idx]
     y = y[idx, ]
     time = y[, 1]
@@ -199,9 +199,9 @@ coxcumhaz = function(y, linear.predictors = NULL, sorted = FALSE) {
   events = sum(event)
   n.risk = n:1
   
-  S0 = cumsum(exb)
+  S0 = .rcumsum(exb)
   haz = event/S0
-  cumhaz = cumsum(haz)
+  cumhaz = cumsum((haz))
   surv = exp(-cumhaz)
   fit = cbind(time = time, n.risk = n.risk, hazard = haz, cumhaz = cumhaz, surv = surv)
   #class(fit) = 'survfit'
