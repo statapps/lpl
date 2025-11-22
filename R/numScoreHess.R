@@ -199,7 +199,7 @@ coxcumhaz = function(y, linear.predictors = NULL, sorted = FALSE) {
   events = sum(event)
   n.risk = n:1
   
-  S0 = rcumsum(exb)
+  S0 = cumsum(exb)
   haz = event/S0
   cumhaz = cumsum(haz)
   surv = exp(-cumhaz)
