@@ -16,7 +16,7 @@ coxlogLik = function(X, y, beta, offset = NULL, H0 = NULL,
     time = y[, 1]
     idx  = order(time, decreasing = TRUE)
     time = time[idx]
-    lp   = lp[idx, ]
+    lp   = lp[idx]
     y    =  y[idx, ]
   }
   
