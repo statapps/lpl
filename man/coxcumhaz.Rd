@@ -1,8 +1,8 @@
 \name{coxcumhaz}
 \alias{coxcumhaz}
-\title{Baseline Cumulative Hazard and Survival Functions for a Cox Model}
+\title{Baseline Hazard, Cumulative Hazard and Survival Functions for a Cox Model}
 \description{
-Estimate the baseline cumulative hazard and survival functions for a
+Estimate the baseline hazard, cumulative hazard and survival functions for a
 Cox proportional hazards model using the Breslow estimator. 
 This function can replace \code{basehaz}, which is hard to use due to the 
 confusion of centered = TRUE / FALSE concerns.
@@ -27,7 +27,8 @@ coxcumhaz(y, linear.predictors = NULL, sorted = FALSE)
 
   \item{sorted}{
   Logical; if \code{TRUE}, the observations are assumed to be already
-  sorted by increasing time. Otherwise the function sorts the data
+  sorted by increasing time. Use this to speed up the function when it is called 
+  repeatedly for the same y. Otherwise the function sorts the data
   internally.
   }
 }
@@ -74,11 +75,14 @@ The returned objects are interpolation functions created with
 
 \value{
 A list containing:
-\item{Ht}{
-A function giving the estimated cumulative hazard \eqn{\hat{H}(t)}.
+\item{ht: }{
+A function giving the estimated baseline hazard \eqn{\hat{H}(t)}.
 }
-\item{St}{
-A function giving the estimated survival function \eqn{\hat{S}(t)}.
+\item{Ht: }{
+A function giving the estimated baseline cumulative hazard \eqn{\hat{H}(t)}.
+}
+\item{St: }{
+A function giving the estimated baseline survival function \eqn{\hat{S}(t)}.
 }
 }
 
@@ -97,6 +101,7 @@ y <- cbind(time, event)
 # Estimate baseline cumulative hazard and survival
 fit <- coxcumhaz(y)
 
+fit$ht(1)   # hazard at time 1
 fit$Ht(1)   # cumulative hazard at time 1
 fit$St(1)   # survival probability at time 1
 

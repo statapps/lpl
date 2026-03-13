@@ -1,6 +1,6 @@
 ### return a partial likelihood or full likelihood of a Cox PH model
 ### this is provided by Bingshu (November 27, 2025)
-coxlogLik = function(X, y, beta, offset = NULL, H0 = NULL, 
+coxlogLik = function(X, y, beta, offset = NULL, H0 = NULL, h0 = NULL, 
                      partial = TRUE, sorted = FALSE) {
   ### sort the time and data
   ### if the function to be called multiple times for the same y,
@@ -39,7 +39,9 @@ coxlogLik = function(X, y, beta, offset = NULL, H0 = NULL,
   } else {
     ## use-supplied cumulative baseline hazard
     Ht = H0(time)
-    ht = rev(diff(c(0, rev(Ht))))
+    if(is.null(h0)) stop("h0 cannot be null if H0 is provided. Try { coxcumhaz } to find h0\n")
+    else ht = h0(time)
+
   }
   
   ## avoid log(0) when event = 0
@@ -76,7 +78,8 @@ coxcumhaz = function(y, linear.predictors = NULL, sorted = FALSE) {
   haz = event/S0
   cumhaz = cumsum((haz))
   surv = exp(-cumhaz)
+  ht = approxfun(time, haz)
   Ht = approxfun(time, cumhaz)
   St = approxfun(time, surv)
-  return(list(Ht = Ht, St = St))
+  return(list(ht = ht, Ht = Ht, St = St))
 }

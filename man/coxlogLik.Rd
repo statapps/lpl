@@ -35,8 +35,13 @@ coxlogLik(X, y, beta, offset = NULL, H0 = NULL, partial = TRUE, sorted = FALSE)
   }
 
   \item{H0}{
-  Optional cumulative baseline hazard function. If provided, it should be a function that takes time values as input and returns the baseline hazard at those times. 
-  If \code{NULL}, the baseline hazard is estimated using the Breslow-type estimator \eqn{h_t = d_t / S_0(t)} when computing the full likelihood.
+  Optional cumulative baseline hazard function. If provided, it should be a function that takes time values as input and returns the baseline cumulative hazard at those times. 
+  If \code{NULL}, the baseline cumulative hazard is estimated using the Breslow-type estimator 
+  when computing the full likelihood.
+  }
+
+  \item{h0}{
+  Optional baseline hazard function. If provided, it should be a function that takes time values as input and returns the baseline hazard at those times. h0 cannot be \code{NULL} if H0 is not \code{NULL}.
   }
 
   \item{partial}{
