@@ -1,11 +1,9 @@
 \name{coxScoreHess}
 \alias{coxScoreHess}
-\alias{coxlogLik}
 
 \title{Calculate the Score vector / Hessian matrix for the Cox model}
 \description{Calculate the partial log Likelihood, Score vector or the Hessian matrix for the Cox proportional hazards model with inputs of covariates, survival outcomes and the relative risks}
 \usage{
-    coxlogLik(X, y, beta, offset = NULL, sorted = FALSE)
     coxScoreHess(X, y, exb, hess = FALSE)
 }
 \arguments{

@@ -3,7 +3,9 @@
 \title{Baseline Cumulative Hazard and Survival Functions for a Cox Model}
 \description{
 Estimate the baseline cumulative hazard and survival functions for a
-Cox proportional hazards model using the Breslow estimator.
+Cox proportional hazards model using the Breslow estimator. 
+This function can replace \code{basehaz}, which is hard to use due to the 
+confusion of centered = TRUE / FALSE concerns.
 }
 
 \usage{
@@ -99,6 +101,7 @@ fit$Ht(1)   # cumulative hazard at time 1
 fit$St(1)   # survival probability at time 1
 
 # Example with linear predictors
-lp <- rnorm(n)
-chz <- coxcumhaz(y, linear.predictors = lp)
+lp  = rnorm(n)
+chz = coxcumhaz(y, linear.predictors = lp)
+Ht  = chz$Ht
 }
