@@ -75,4 +75,14 @@ oddsRatio = function(x, conf.int = 0.95, ...) {
   results
 }
 
-
+## softmax activation function, y = softmax(X)
+softmax <- function(x) {
+  if (is.matrix(x)) { 
+    rowMax <- apply(x,  1, max)
+    ex <- exp(sweep(x,  1, rowMax, "-"))
+       return(sweep(ex, 1, rowSums(ex), "/"))
+  } else {  # Vector logic: Standard stable softmax
+    ex <- exp(x - max(x))
+    return(ex / sum(ex))
+  }
+}
