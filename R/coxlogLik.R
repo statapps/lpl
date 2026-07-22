@@ -11,18 +11,18 @@ coxlogLik = function(X, y, beta, offset = NULL, H0 = NULL, h0 = NULL,
   lp = as.vector(X%*%beta)
   if(!is.null(offset)) lp = lp + offset
   
+  time  = y[, 1]
+  event = y[, 2]
   ## sort data by decreasing time if needed
   if(!sorted) {
-    time = y[, 1]
     idx  = order(time, decreasing = TRUE)
     time = time[idx]
+    event= event[idx]
     lp   = lp[idx]
-    y    =  y[idx, ]
   }
   
   exb = exp(lp)
   S0 = cumsum(exb)
-  event = y[, 2]
   
   ### Partial log-likelihood
   if(partial) {
@@ -41,7 +41,6 @@ coxlogLik = function(X, y, beta, offset = NULL, H0 = NULL, h0 = NULL,
     Ht = H0(time)
     if(is.null(h0)) stop("h0 cannot be null if H0 is provided. Try { coxcumhaz } to find h0\n")
     else ht = h0(time)
-
   }
   
   ## avoid log(0) when event = 0
@@ -58,19 +57,20 @@ coxlogLik = function(X, y, beta, offset = NULL, H0 = NULL, h0 = NULL,
 #fit = coxph(y~x)
 #print(basehaz(fit))
 #print(coxcumhaz(y, predict(fit)))
-coxcumhaz = function(y, linear.predictors = NULL, sorted = FALSE) {
+coxcumhaz = function(y, linear.predictors = NULL, minToMax = FALSE) {
   n = length(y[, 1])
   
   if(!is.null(linear.predictors)) exb = exp(linear.predictors)
   else exb = rep(1, n)
   
-  if(!sorted) {
-    idx = order(y[, 1])
-    exb = exb[idx]
-    y = y[idx, ]
-    time = y[, 1]
-  }
+  time  = y[, 1]
   event = y[, 2]
+  if(!minToMax) {
+    idx  = order(y[, 1])
+    exb  = exb[idx]
+    time = time[idx]
+    event= event[idx]
+  }
   events = sum(event)
   n.risk = n:1
   
