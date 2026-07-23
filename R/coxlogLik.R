@@ -35,7 +35,8 @@ coxlogLik = function(X, y, beta, offset = NULL, H0 = NULL, h0 = NULL,
   if(is.null(H0)) {
     ## Breslow baseline hazard estimate
     ht = event/S0
-    Ht = rev(cumsum(rev(ht)))
+    #Ht = rev(cumsum(rev(ht)))
+    Ht = sum(ht) - cumsum(ht) + ht   ### faster
   } else {
     ## use-supplied cumulative baseline hazard
     Ht = H0(time)
