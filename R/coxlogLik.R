@@ -58,26 +58,23 @@ coxlogLik = function(X, y, beta, offset = NULL, H0 = NULL, h0 = NULL,
 #fit = coxph(y~x)
 #print(basehaz(fit))
 #print(coxcumhaz(y, predict(fit)))
-coxcumhaz = function(y, linear.predictors = NULL, minToMax = FALSE) {
+coxcumhaz = function(y, linear.predictors = NULL, sorted = FALSE) {
   n = length(y[, 1])
-  
   if(!is.null(linear.predictors)) exb = exp(linear.predictors)
   else exb = rep(1, n)
   
   time  = y[, 1]
   event = y[, 2]
-  if(!minToMax) {
-    idx  = order(y[, 1])
-    exb  = exb[idx]
+  if (!sorted) {
+    idx = order(time, decreasing = TRUE)
+    exb = exb[idx]
     time = time[idx]
-    event= event[idx]
+    event = event[idx]
   }
-  events = sum(event)
-  n.risk = n:1
-  
-  S0 = .rcumsum(exb)
+  S0 = cumsum(exb)
   haz = event/S0
-  cumhaz = cumsum((haz))
+  #cumhaz = .rcumsum((haz))
+  cumhaz = sum(haz) - cumsum(haz) + haz ### faster
   surv = exp(-cumhaz)
   ht = approxfun(time, haz)
   Ht = approxfun(time, cumhaz)
