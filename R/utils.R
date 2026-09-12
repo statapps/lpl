@@ -38,11 +38,11 @@ csv.lm = function(x, ...) {
   csv(out, ...)
 }
 
-csv.survfit = function(fit, time = NULL, digits = 3, title = FALSE) {
+csv.survfit = function(x, time = NULL, digits = 3, title = FALSE, ...) {
   if(title) cat("Time, Survival percentage, 95% CI lower, 95% CI upper\n")
-  if(is.null(time)) time = fit$time
+  if(is.null(time)) time = x$time
   
-  sfit = summary(fit)
+  sfit = summary(x)
   sout = NULL
   out = cbind(sfit$time, sfit$surv, sfit$lower, sfit$upper)
   K = length(time)

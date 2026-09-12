@@ -14,6 +14,7 @@ Calculate the Brier score and the integration of the Brier score (IBS) using the
 }
 \usage{
 brierScore(object, St, tau)
+ibs(object, ...)
 \method{ibs}{default}(object, ...)
 \method{ibs}{coxph}(object, newdata = NULL, newy = NULL, ...)
 \method{ibs}{lple}(object, newdata = NULL, newy = NULL, ...)

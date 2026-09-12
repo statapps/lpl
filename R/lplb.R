@@ -1,16 +1,7 @@
 #######clean worspace and set file path
 #rm(list=ls())
-#getwd()
-
-########Load library and functions
-#library(parallel)
-#library(survival)
-#library(MASS)
-
-#source('lplb_basicFunctions.R')
 
 lplb <- function(x, ...) UseMethod("lplb")
-
 lplb.default <- function(x, y, control, ...){
   t0 = Sys.time()
   X = as.matrix(x)
@@ -31,7 +22,7 @@ lplb.default <- function(x, y, control, ...){
   Q1 = fit$maxT
   sd = fit$sd
   cat('Q1 = ', Q1, '\n')
-  fit$mTstar = bstrp(X, y, control)
+  fit$mTstar = .bstrpLple(X, y, control)
   B = control$B
   pvalue = (sum(fit$mTstar>=Q1)+0.5)/(B+1)
   cat('p-value = ', pvalue, '\n')

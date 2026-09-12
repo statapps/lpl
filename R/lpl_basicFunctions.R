@@ -334,7 +334,7 @@ lple_fit = function(X, y, control, se.fit = TRUE, maxT=FALSE) {
 }
 
 ### 05. bootstrap
-bstrp = function(X, y, control){
+.bstrpLple = function(X, y, control){
   X = as.matrix(X)
   kernel = control$kernel
   h  = control$h

@@ -5,7 +5,8 @@ import(MASS)
 
 importFrom("graphics", "par")
 importFrom("methods", "is")
-importFrom("stats", "approx", "approxfun", "dnorm", "ecdf", "integrate", "model.frame",
+importFrom("stats", "approx", "approxfun", "coef", "confint.default", 
+           "dnorm", "ecdf", "integrate", "model.frame",
            "model.matrix", "model.response", "predict", "qnorm",
            "quantile", "rbinom", "residuals", "rexp", "runif", "uniroot", "vcov")
 

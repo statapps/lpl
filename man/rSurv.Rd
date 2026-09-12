@@ -1,6 +1,6 @@
 \name{rsurv}
 \alias{rsurv}
-\alias{rSurv}
+%\alias{rSurv}
 \alias{dsurv}
 \alias{psurv}
 \alias{qsurv}

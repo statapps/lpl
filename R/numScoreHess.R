@@ -120,9 +120,19 @@ multiRoot = function(func, theta,..., verbose = FALSE, maxIter = 50,
 #reverse rcumsum can be avoided if scored largest time to smallest time
 #rcumsum=function(x) rev(cumsum(rev(x))) # sum from last to first
 
-coxScoreHess = function(X, y, exb, hess = FALSE) {
+coxScoreHess = function(X, y, exb, hess = FALSE, sorted = FALSE) {
   ### exb = exp(X%*%beta)
   ### delta shall be sorted from largest to smallest to avoid using rcumsum.
+  
+  time = y[, 1]
+  ## sort data by decreasing time if needed
+  if(!sorted) {
+    idx  = order(time, decreasing = TRUE)
+    X = X[idx, drop = FALSE]
+    y = y[idx, ]
+    exb = exb[idx]
+  }
+
   y1    = y[, 1]
   delta = y[, 2]
   if((y1[1] < y1[2]) | (y1[2] < y1[length(y1)])) stop("Sort survival time from the largest to the smallest")

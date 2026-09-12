@@ -1,7 +1,6 @@
 \name{lplb}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \alias{lplb}
-\alias{bstrp}
 \alias{lplb.default}
 \alias{lplb.formula}
 \alias{maxTest}
@@ -13,6 +12,7 @@ Local partial likelihood bootstrap (LPLB) method to fit biomarker Models
 \{lplb\} is a R package for local partial likelihood estimation (LPLE) (Fan et al., 2006) of the coefficients of covariates with interactions of the biomarker W, and hypothesis test of whether the relationships between covariates and W are significant, by using bootstrap method.
 }
 \usage{
+lplb(x, ...)
 \method{lplb}{default}(x, y, control, ...)
 \method{lplb}{formula}(formula, data=list(...), control = list(...), ...)
 
@@ -43,7 +43,6 @@ If not found in data, the variables are taken from environment(formula).}
   \item{control}{a list of parameters for controlling the fitting process. See 'lplb.control' for details}
 
   \item{\dots}{additional arguments to be passed to the low level regression fitting functions (see below).} 
-%- do we need this??????????
 }
 \details{
 Here 'w' is a Biomarker variable. This variable is required and shall be the last dependent variable in the formula.

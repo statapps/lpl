@@ -12,7 +12,7 @@ function is called repeatedly with the same outcome data.
 }
 
 \usage{
-coxlogLik(X, y, beta, offset = NULL, H0 = NULL, partial = TRUE, sorted = FALSE)
+coxlogLik(X, y, beta, offset = NULL, H0 = NULL, h0 = NULL, partial = TRUE, sorted = FALSE)
 }
 
 \arguments{
