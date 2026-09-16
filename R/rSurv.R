@@ -22,7 +22,8 @@ dsurv = function(x, h0 = NULL, H0 = function(x){x}, log=FALSE) {
     epsilon = 1e-5
     h0x = (H0(x+epsilon)-H0(x-epsilon))/(2*epsilon)
   }
-  if(sum(h0x<=0)>1) stop("h0(t) must be positive")
+  #if(sum(h0x<=0)>0) stop("h0(t) must be positive")
+  if(any(h0x<=0)) stop("h0(t) must be positive")
   logf = log(h0x) + psurv(x, h0=h0, H0=H0, low.tail=FALSE, log.p=TRUE)
   if(log) return(logf) else return(exp(logf))
 }

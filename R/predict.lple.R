@@ -22,7 +22,7 @@ predict.lple = function(object, newdata, newy = NULL, ...) {
     ### approximation beta(w) and g(w) for w where beta and g are not estimated
     bnw = apply(beta, 2, .appxf, x=w, xout = nw)
     gnw = .appxf(gw, x=w, xout = nw)
-    lp  = rowSums(Z*bnw + gnw)
+    lp  = rowSums(Z*bnw) + gnw
     risk = exp(lp)
   }
   result = list(lp = lp, risk = risk, cumhaz = sfit$cumhaz, time = sfit$time)

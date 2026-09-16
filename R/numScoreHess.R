@@ -128,7 +128,7 @@ coxScoreHess = function(X, y, exb, hess = FALSE, sorted = FALSE) {
   ## sort data by decreasing time if needed
   if(!sorted) {
     idx  = order(time, decreasing = TRUE)
-    X = X[idx, drop = FALSE]
+    X = X[idx, ,drop = FALSE]
     y = y[idx, ]
     exb = exb[idx]
   }

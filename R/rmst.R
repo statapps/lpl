@@ -28,7 +28,7 @@ rmst.coxph = function(object, newdata=NULL, linear.predictors = NULL, tau=NULL, 
   }
 
   if(is.null(newdata)) {
-    if(is.null(linear.predictors)) return(rmst(object$y, tua = tau))
+    if(is.null(linear.predictors)) return(rmst(object$y, tau = tau))
     else return(sapply(linear.predictors, rmsfunlp, tm = time, chz = chaz, tau=tau))
   }
   if(!is.null(linear.predictors)) stop("Only one of the newdata or the linear.predictors can be non-null.")
